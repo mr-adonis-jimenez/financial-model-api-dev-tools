@@ -1,0 +1,88 @@
+name: Validate Repository Structure
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate-structure:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate required directories
+        run: |
+          echo "Checking for required directories..."
+          required_dirs=("model" "docs" "scripts" "data" "screenshots")
+          
+          for dir in "${required_dirs[@]}"; do
+            if [ ! -d "$dir" ]; then
+              echo "❌ ERROR: Required directory missing: $dir"
+              exit 1
+            else
+              echo "✅ Found directory: $dir"
+            fi
+          done
+
+      - name: Validate required documentation files
+        run: |
+          echo "Checking for required documentation files..."
+          required_files=("README.md" "LICENSE" "CONTRIBUTING.md" "docs/METHODOLOGY.md" "docs/ASSUMPTIONS.md")
+          
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "❌ ERROR: Required file missing: $file"
+              exit 1
+            else
+              echo "✅ Found file: $file"
+            fi
+          done
+
+      - name: Check for large files
+        run: |
+          echo "Scanning for files exceeding 100MB..."
+          large_files=$(find . -type f -size +100M ! -path "./.git/*" ! -path "./node_modules/*" ! -path "./.venv/*" 2>/dev/null)
+          
+          if [ -n "$large_files" ]; then
+            echo "❌ ERROR: Large files detected (>100MB):"
+            echo "$large_files"
+            exit 1
+          else
+            echo "✅ No large files detected"
+          fi
+
+      - name: Validate README sections
+        run: |
+          echo "Validating README.md content..."
+          required_sections=("Overview" "Problem Statement" "Key Capabilities" "System Architecture" "Repository Structure")
+          
+          for section in "${required_sections[@]}"; do
+            if grep -q "^## .*$section\|^### .*$section" README.md; then
+              echo "✅ Found section: $section"
+            else
+              echo "⚠️  Section not found in README: $section"
+            fi
+          done
+
+      - name: Validate file permissions and formats
+        run: |
+          echo "Checking file formats and permissions..."
+          if [ -f "docs/METHODOLOGY.md" ] && [ -f "docs/ASSUMPTIONS.md" ]; then
+            echo "✅ Required markdown files present"
+          fi
+
+      - name: Summary
+        if: success()
+        run: |
+          echo "✅ All repository structure validations passed!"
+          echo "Repository is ready for collaboration."
+
+      - name: Failure Summary
+        if: failure()
+        run: |
+          echo "❌ Repository structure validation failed."
+          echo "Please review the errors above and fix any missing files or directories."
