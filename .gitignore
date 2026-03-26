@@ -3,6 +3,11 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# Generated model outputs (re-created by running the pipeline)
+data/outputs/*.csv
+data/outputs/*.json
+data/outputs/*.xlsx
+
 # C extensions
 *.so
 

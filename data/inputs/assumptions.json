@@ -1,0 +1,150 @@
+{
+  "_comment": "Central assumptions file for the API SaaS financial model. All monetary values in USD.",
+  "model_meta": {
+    "version": "1.0.0",
+    "start_month": "2024-01",
+    "projection_months": 36,
+    "currency": "USD"
+  },
+
+  "pricing_tiers": [
+    {
+      "name": "Free",
+      "monthly_fee": 0,
+      "included_calls": 1000,
+      "overage_per_1k_calls": 0,
+      "description": "Freemium tier — developer exploration"
+    },
+    {
+      "name": "Starter",
+      "monthly_fee": 49,
+      "included_calls": 50000,
+      "overage_per_1k_calls": 0.80,
+      "description": "Small teams and early-stage startups"
+    },
+    {
+      "name": "Growth",
+      "monthly_fee": 299,
+      "included_calls": 500000,
+      "overage_per_1k_calls": 0.50,
+      "description": "Scaling businesses with moderate API volume"
+    },
+    {
+      "name": "Enterprise",
+      "monthly_fee": 1499,
+      "included_calls": 5000000,
+      "overage_per_1k_calls": 0.20,
+      "description": "High-volume customers with SLA requirements"
+    }
+  ],
+
+  "customer_acquisition": {
+    "initial_customers_by_tier": {
+      "Free": 200,
+      "Starter": 40,
+      "Growth": 12,
+      "Enterprise": 2
+    },
+    "monthly_new_customers_by_tier": {
+      "Free": 80,
+      "Starter": 18,
+      "Growth": 5,
+      "Enterprise": 1
+    },
+    "monthly_growth_rate_by_tier": {
+      "Free": 0.08,
+      "Starter": 0.10,
+      "Growth": 0.12,
+      "Enterprise": 0.08
+    },
+    "cac_by_tier": {
+      "Free": 0,
+      "Starter": 120,
+      "Growth": 850,
+      "Enterprise": 8500
+    }
+  },
+
+  "churn": {
+    "monthly_churn_rate_by_tier": {
+      "Free": 0.15,
+      "Starter": 0.05,
+      "Growth": 0.025,
+      "Enterprise": 0.01
+    },
+    "free_to_paid_conversion_rate": 0.04,
+    "upgrade_rate_starter_to_growth": 0.02,
+    "upgrade_rate_growth_to_enterprise": 0.01
+  },
+
+  "api_usage": {
+    "avg_calls_per_customer_by_tier": {
+      "Free": 600,
+      "Starter": 35000,
+      "Growth": 320000,
+      "Enterprise": 3800000
+    },
+    "monthly_usage_growth_rate": 0.05,
+    "overage_fraction_by_tier": {
+      "Free": 0.0,
+      "Starter": 0.20,
+      "Growth": 0.25,
+      "Enterprise": 0.30
+    }
+  },
+
+  "unit_economics": {
+    "infrastructure_cost_per_1k_calls": 0.04,
+    "support_cost_per_customer_per_month": {
+      "Free": 0.50,
+      "Starter": 4.00,
+      "Growth": 18.00,
+      "Enterprise": 120.00
+    },
+    "payment_processing_rate": 0.029,
+    "payment_processing_fixed": 0.30
+  },
+
+  "headcount": {
+    "initial_headcount": {
+      "engineering": 4,
+      "sales": 2,
+      "customer_success": 1,
+      "marketing": 1,
+      "operations": 1
+    },
+    "avg_fully_loaded_cost_by_dept": {
+      "engineering": 165000,
+      "sales": 130000,
+      "customer_success": 95000,
+      "marketing": 110000,
+      "operations": 90000
+    },
+    "hiring_triggers": {
+      "engineering_per_n_paying_customers": 40,
+      "sales_per_n_paying_customers": 25,
+      "customer_success_per_n_paying_customers": 50
+    }
+  },
+
+  "operating_expenses": {
+    "monthly_fixed": {
+      "hosting_base": 2500,
+      "tooling_and_saas": 1200,
+      "office_and_misc": 800
+    },
+    "monthly_variable": {
+      "hosting_per_1m_calls": 80,
+      "marketing_spend_pct_of_revenue": 0.12
+    }
+  },
+
+  "financial_targets": {
+    "gross_margin_floor": 0.60,
+    "ltv_to_cac_floor": 3.0,
+    "payback_period_months_ceiling": 18,
+    "arr_target_month_12": 500000,
+    "arr_target_month_24": 2000000,
+    "arr_target_month_36": 6000000
+  }
+}
