@@ -1,0 +1,68 @@
+name: Repository Policy Enforcement
+
+on:
+  pull_request:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  pull-requests: read
+  checks: write
+
+concurrency:
+  group: policy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  policy-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # 🔹 Enforce branch naming convention
+      - name: Validate branch name
+        if: github.event_name == 'pull_request'
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          echo "Checking branch: $BRANCH_NAME"
+          if [[ ! "$BRANCH_NAME" =~ ^(main|feature\/.+|bugfix\/.+|hotfix\/.+|chore\/.+)$ ]]; then
+            echo "❌ Invalid branch naming convention"
+            exit 1
+          fi
+
+      # 🔹 Prevent large files (Excel models can get big—control it)
+      - name: Check for large files
+        run: |
+          MAX_SIZE=5000000
+          for file in $(git ls-files); do
+            size=$(stat -c%s "$file")
+            if [ $size -gt $MAX_SIZE ]; then
+              echo "❌ File $file exceeds 5MB limit"
+              exit 1
+            fi
+          done
+
+      # 🔹 Ensure required project structure exists
+      - name: Validate repo structure
+        run: |
+          REQUIRED_DIRS=("model" "docs" "screenshots")
+          for dir in "${REQUIRED_DIRS[@]}"; do
+            if [ ! -d "$dir" ]; then
+              echo "❌ Missing required directory: $dir"
+              exit 1
+            fi
+          done
+
+      # 🔹 Ensure README exists
+      - name: Check README
+        run: |
+          if [ ! -f "README.md" ]; then
+            echo "❌ README.md is missing"
+            exit 1
+          fi
+
+      - name: Policy checks passed
+        run: echo "✅ All policy checks passed"
