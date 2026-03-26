@@ -1,48 +1,127 @@
-## 🔥 Flagship Project: Financial Model – API SaaS Decision Engine
+# 📊 Financial Model – API SaaS Decision Engine
 
-📊 A driver-based financial modeling system designed to simulate the economics of a usage-based API product, combining Excel, analytics, and system-level thinking.
-
-### 🚀 What It Does
-
-* Models revenue, costs, and profitability for an API-based SaaS business
-* Simulates growth, churn, and infrastructure scaling
-* Provides scenario analysis (Base / Upside / Downside)
-* Surfaces insights through an executive-level dashboard
-
-### 🧠 Why It Matters
-
-This isn’t just a spreadsheet—it’s a **decision-support system** built to answer:
-
-* When does the business break even?
-* How sensitive are margins to churn and infra costs?
-* What happens under different growth scenarios?
-
-### ⚙️ Tech + Stack
-
-* Excel (advanced financial modeling, dynamic formulas, dashboards)
-* Python (data simulation, optional analytics layer)
-* GitHub (version control, structured repo, documentation)
-
-### 📸 Preview
-
-![Dashboard](./financial-model-api-service/screenshots/dashboard-overview.png)
-
-### 📂 Repo
-
-👉 [View Full Project](https://github.com/YOUR-USERNAME/financial-model-api-service)
+> A driver-based financial modeling system designed to simulate, analyze, and communicate the economics of a usage-based API business.
 
 ---
 
-### 💡 Key Insight
+## 🚀 Overview
 
-> “Scale only works when unit economics are engineered correctly.”
+This project goes beyond a traditional spreadsheet. It is a **decision-support system** that models how an API-driven SaaS product performs under varying conditions of growth, pricing, and cost structure.
+
+The model enables stakeholders to evaluate:
+
+* Revenue scalability under different usage patterns
+* Cost dynamics tied to infrastructure and operations
+* Profitability sensitivity to churn and pricing
+* Break-even timelines and margin expansion
 
 ---
 
-### 🧩 What This Demonstrates
+## 🧠 Problem Statement
 
-* Translating business models into analytical systems
-* Building clean, auditable financial logic
-* Communicating insights visually for decision-makers
-* Bridging Excel + Python + data workflows
+Usage-based API businesses operate on thin margins and high volume.
+Without a structured financial model, it is difficult to answer:
 
+* When does the business become profitable?
+* How do infrastructure costs scale with demand?
+* What is the impact of churn on long-term revenue?
+* Which levers (price, growth, retention) drive the most value?
+
+This project addresses those questions through a structured, auditable modeling framework.
+
+---
+
+## 🧩 Key Capabilities
+
+### 🔹 Scenario-Based Forecasting
+
+Evaluate Base, Upside, and Downside scenarios using dynamic inputs and real-time recalculation.
+
+### 🔹 Unit Economics Engine
+
+Break down revenue and costs at the API-call level to surface contribution margins and scalability constraints.
+
+### 🔹 Growth & Retention Modeling
+
+Simulate user acquisition, churn, and expansion to understand long-term revenue trajectories.
+
+### 🔹 Executive Dashboard
+
+Translate raw financial outputs into clear, decision-ready insights using visual KPIs and trend analysis.
+
+### 🔹 Model Integrity & Auditability
+
+Built-in validation checks ensure:
+
+* No broken formulas
+* No hidden hardcoded assumptions
+* Transparent calculation flow
+
+---
+
+## ⚙️ System Architecture
+
+```text
+[ Assumptions ] 
+      ↓
+[ Revenue + Cost Drivers ]
+      ↓
+[ P&L Engine ]
+      ↓
+[ Scenario Layer ]
+      ↓
+[ Dashboard (KPIs + Visuals) ]
+```
+
+Optional extension:
+
+```text
+[ Python Simulation Layer ] → [ Data Inputs ] → [ Excel Model ]
+```
+
+---
+
+## 📊 Key Metrics Modeled
+
+* Monthly Revenue
+* EBITDA
+* Net Margin (%)
+* Customer Churn (%)
+* Cost per API Call
+* Contribution Margin
+* Break-even Timeline
+
+---
+
+## 📸 Dashboard Preview
+
+![Dashboard](./screenshots/dashboard-overview.png)
+
+---
+
+## 📂 Repository Structure
+
+```text
+model/        → Excel financial model  
+docs/         → Assumptions, methodology, architecture  
+screenshots/  → Dashboard previews  
+scripts/      → Optional data simulation (Python)  
+data/         → Generated datasets  
+```
+
+---
+
+## 💡 Strategic Insight
+
+> “In usage-based systems, profitability is not driven by revenue alone — it is engineered through unit economics and cost discipline.”
+
+---
+
+## 🧠 What This Project Demonstrates
+
+* Translating business problems into analytical systems
+* Building scalable, auditable financial models
+* Communicating complex insights through clean visualization
+* Bridging Excel, data workflows, and system design
+
+---
