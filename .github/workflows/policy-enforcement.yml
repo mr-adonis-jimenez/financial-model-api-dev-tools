@@ -28,7 +28,7 @@ jobs:
         run: |
           BRANCH_NAME="${{ github.head_ref }}"
           echo "Checking branch: $BRANCH_NAME"
-          if [[ ! "$BRANCH_NAME" =~ ^(main|feature\/.+|bugfix\/.+|hotfix\/.+|chore\/.+)$ ]]; then
+          if [[ ! "$BRANCH_NAME" =~ ^(main|feature\/.+|fix\/.+|bugfix\/.+|hotfix\/.+|chore\/.+|ci\/.+|docs\/.+|refactor\/.+)$ ]]; then
             echo "❌ Invalid branch naming convention"
             exit 1
           fi
